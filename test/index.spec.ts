@@ -3,7 +3,7 @@ import { parse } from '../src';
 describe('index', () => {
   describe('parse', () => {
     it('should parse empty json', () => {
-      expect(parse('{}')).toMatchObject({});
+      expect(parse('{}')).toEqual({});
     });
 
     it('should parse json with any-quoted strings', () => {
@@ -36,7 +36,7 @@ describe('index', () => {
           },
           [\`\`]: [\`single-line "Template 'string value'" \\\` inner escaped string \`]
         }`)
-      ).toMatchObject({
+      ).toEqual({
         'double `quoted` \'string\' "with "escaped quotes "':
           "single `string` \"string\" 'with 'escaped quotes '",
         "single `string` \"string\" 'with 'escaped quotes '":
@@ -91,7 +91,7 @@ describe('index', () => {
           foo_123BAr_456_BAZ: 1234,
           bar1Baz2: "baz bat"
         }`)
-      ).toMatchObject({
+      ).toEqual({
         foo: 'bar',
         foo_bar: 123,
         foo_123BAr_456_BAZ: 1234,
@@ -131,7 +131,7 @@ describe('index', () => {
           "bar": "// some string" // inline comment
           /* "foobar": "Baz", */
         }`)
-      ).toMatchObject({
+      ).toEqual({
         foo: '/* some string */',
         bar: '// some string',
       });
@@ -152,10 +152,14 @@ describe('index', () => {
             "nested array": [1,2,[3,{"some":"value[1,2,3,]{1,'23',}",},4,[5,6,/* some comment */],],],
           },
         }`)
-      ).toMatchObject({
+      ).toEqual({
         'some array': [1, 2],
         'nested object': {
           element: 123,
+          another: {
+            'another array': [1, 2, 3],
+            'some value': false,
+          },
           'nested array': [
             1,
             2,
@@ -222,7 +226,47 @@ describe('index', () => {
           },
           [\`\`]: [\`single-line "Template 'string value'" \\\` inner escaped string \`]
         }`)
-      ).toMatchObject({});
+      ).toEqual({
+        'double `quoted` \'string\' "with "escaped quotes "':
+          'single `string` "string" \'with {1,"23",} \'escaped quotes \'',
+        "single `string` \"string\" 'with 'escaped quotes '":
+          'double `quoted` \'string\' "with "escaped quotes " [1,2,3,]',
+        'double `quoted` \'string\' "with "escaped quotes " in square quoted key':
+          [
+            {
+              foo_123BAr_456_BAZ:
+                "single `string` \"string\" /* 'with 'escaped quotes */ '",
+              "single `string` \"string\" 'with 'escaped quotes ' in // square quoted key":
+                [
+                  "single `string` \"string\" 'with 'escaped quotes '",
+                  'double `quoted` \'string\' "with "escaped quotes "',
+                ],
+            },
+            1234,
+            {
+              fooBar: 'double `quoted` \'string\' "with "escaped quotes "',
+              '/* some string */': false,
+              qwerty1234: '/* some string */',
+            },
+          ],
+        " \"multi-line\"\n          ${Template string} 'key\"\n          ` inner escaped ' string\n          '''\"\n    ` \n":
+          'single-line ${"Template \'string} value\'" ` inner escaped string ',
+        'single-line ${Template string} key ` inner escaped string ':
+          "\n  \"multi-line\"\n          ${Template string} 'value\"\n    ` inner escaped ' string\n      ` \n      '''\"\n",
+        "nested\"-object test {1,'23',}": {
+          '': [
+            'single-line "Template \'string value\'" ` inner escaped string ',
+            'double `quoted` \'string\' "with "escaped quotes "',
+            "single `string` \"string\" 'with 'escaped quotes '",
+          ],
+          'multiline "array"': [
+            'single-line "Template \'string value\'" ` inner escaped string ',
+            'double `quoted` \'string\' "with "escaped quotes "',
+            "single `string` \"string\" 'with 'escaped quotes '",
+          ],
+        },
+        '': ['single-line "Template \'string value\'" ` inner escaped string '],
+      });
     });
 
     it('should throw an error when parsing empty string', () => {
