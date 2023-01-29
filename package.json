@@ -1,7 +1,7 @@
 {
-  "name": "js-object-to-json",
+  "name": "tolerant-json-parser",
   "version": "0.0.0-development",
-  "description": "JS Object to JSON converter",
+  "description": "Tolerant JSON parser",
   "main": "./lib/index.js",
   "files": [
     "lib/**/*"
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jackardios/js-object-to-json.git"
+    "url": "git+https://github.com/jackardios/tolerant-json-parser.git"
   },
   "license": "MIT",
   "author": {
@@ -31,18 +31,24 @@
     "node": ">=12.0"
   },
   "keywords": [
+    "tolerant",
+    "loose",
+    "weak",
+    "safe",
     "convert",
     "converter",
     "conversion",
+    "parse",
+    "parser",
+    "json",
     "js-to-json",
     "js-object",
-    "js",
-    "json"
+    "js"
   ],
   "bugs": {
-    "url": "https://github.com/jackardios/js-object-to-json/issues"
+    "url": "https://github.com/jackardios/tolerant-json-parser/issues"
   },
-  "homepage": "https://github.com/jackardios/js-object-to-json#readme",
+  "homepage": "https://github.com/jackardios/tolerant-json-parser#readme",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
