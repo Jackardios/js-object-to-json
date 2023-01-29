@@ -1,6 +1,7 @@
 # Tolerant JSON parser
 
 [![npm package][npm-img]][npm-url]
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/tolerant-json-parser)
 [![Build Status][build-img]][build-url]
 [![Downloads][downloads-img]][downloads-url]
 [![Issues][issues-img]][issues-url]
