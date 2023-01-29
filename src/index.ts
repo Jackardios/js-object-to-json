@@ -92,8 +92,6 @@ export function parse(looseJSON: string): ReturnType<typeof JSON.parse> {
       return match;
     });
 
-  console.log(normalized);
-
   return JSON.parse(normalized);
 }
 
