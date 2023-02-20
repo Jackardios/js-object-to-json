@@ -12,7 +12,7 @@ A very tolerant JSON parser. It supports all the current JSON standard, along wi
 
 - Unquoted keys
 - Single-quotes strings
-- Multi-line template strings without interpolations (`some string`)
+- Multi-line template strings without interpolations (\`some string\`)
 - Multi-line comments (/\* ... \*/)
 - Single-line comments (// ...)
 - Trailing commas
